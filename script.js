@@ -48,3 +48,10 @@ message.style.height =
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', () => message.remove());
+
+document.querySelector('.btn--scroll-to').addEventListener('click', () => {
+  window.scrollTo({
+    top: document.getElementById('section--1').offsetTop,
+    behavior: 'smooth',
+  });
+});
