@@ -7,6 +7,7 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const navLinks = document.querySelector('.nav__links');
 
 const openModal = function (e) {
   e.preventDefault(); //prevents hrefs with value '#' from taking us to top of the page
@@ -54,4 +55,15 @@ document.querySelector('.btn--scroll-to').addEventListener('click', () => {
     top: document.getElementById('section--1').offsetTop,
     behavior: 'smooth',
   });
+});
+
+navLinks.addEventListener('click', e => {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+
+    document
+      .querySelector(id)
+      .scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
