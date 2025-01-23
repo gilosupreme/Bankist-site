@@ -8,6 +8,9 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const navLinks = document.querySelector('.nav__links');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContent = document.querySelectorAll('.operations__content');
 
 const openModal = function (e) {
   e.preventDefault(); //prevents hrefs with value '#' from taking us to top of the page
@@ -66,4 +69,23 @@ navLinks.addEventListener('click', e => {
       .querySelector(id)
       .scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+});
+
+tabsContainer.addEventListener('click', e => {
+  const tabBtn = e.target.closest('.operations__tab');
+  //remove active class from all btns first
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
+
+  if (!tabBtn) return;
+
+  tabBtn.classList.add('operations__tab--active');
+  //remove active class on all tab content containers
+  tabContent.forEach(tc => tc.classList.remove('operations__content--active'));
+
+  const activeContentNum = tabBtn.dataset.tab;
+  const activeContent = document.querySelector(
+    `.operations__content--${activeContentNum}`
+  );
+
+  activeContent.classList.add('operations__content--active');
 });
