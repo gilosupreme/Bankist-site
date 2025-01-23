@@ -72,17 +72,17 @@ navLinks.addEventListener('click', e => {
 });
 
 tabsContainer.addEventListener('click', e => {
-  const tabBtn = e.target.closest('.operations__tab');
+  const clickedBtn = e.target.closest('.operations__tab');
   //remove active class from all btns first
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
 
-  if (!tabBtn) return;
+  if (!clickedBtn) return;
 
-  tabBtn.classList.add('operations__tab--active');
+  clickedBtn.classList.add('operations__tab--active');
   //remove active class on all tab content containers
   tabContent.forEach(tc => tc.classList.remove('operations__content--active'));
 
-  const activeContentNum = tabBtn.dataset.tab;
+  const activeContentNum = clickedBtn.dataset.tab;
   const activeContent = document.querySelector(
     `.operations__content--${activeContentNum}`
   );
