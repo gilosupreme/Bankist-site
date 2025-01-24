@@ -11,6 +11,7 @@ const navLinks = document.querySelector('.nav__links');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabContent = document.querySelectorAll('.operations__content');
+const nav = document.querySelector('.nav');
 
 const openModal = function (e) {
   e.preventDefault(); //prevents hrefs with value '#' from taking us to top of the page
@@ -89,3 +90,21 @@ tabsContainer.addEventListener('click', e => {
 
   activeContent.classList.add('operations__content--active');
 });
+
+const handleHover = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const hovered = e.target;
+
+    const navSiblings = document.querySelectorAll('.nav__link');
+
+    navSiblings.forEach(link => {
+      if (link != hovered) {
+        link.style.opacity = this;
+        document.querySelector('.nav__logo').style.opacity = this;
+      }
+    });
+  }
+};
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
