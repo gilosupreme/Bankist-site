@@ -36,7 +36,8 @@ document.addEventListener('keydown', e => {
     closeModal();
   }
 });
-
+///////////////////////////////////////
+// Cookie message section
 const message = document.createElement('div');
 message.classList.add('cookie-message');
 message.innerHTML =
@@ -53,7 +54,8 @@ message.style.height =
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', () => message.remove());
-
+///////////////////////////////////////
+// Smooth scroll
 document.querySelector('.btn--scroll-to').addEventListener('click', () => {
   window.scrollTo({
     top: document.getElementById('section--1').offsetTop,
@@ -71,7 +73,8 @@ navLinks.addEventListener('click', e => {
       .scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 });
-
+///////////////////////////////////////
+// Tabbed component
 tabsContainer.addEventListener('click', e => {
   const clickedBtn = e.target.closest('.operations__tab');
   //remove active class from all btns first
@@ -90,11 +93,12 @@ tabsContainer.addEventListener('click', e => {
 
   activeContent.classList.add('operations__content--active');
 });
-
+///////////////////////////////////////
+// Nav Hover
 const handleHover = function (e) {
-  if (e.target.classList.contains('nav__link')) {
-    const hovered = e.target;
+  const hovered = e.target;
 
+  if (e.target.classList.contains('nav__link')) {
     const navSiblings = document.querySelectorAll('.nav__link');
 
     navSiblings.forEach(link => {
@@ -108,3 +112,5 @@ const handleHover = function (e) {
 
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
+///////////////////////////////////////
+// Sticky Navbar
