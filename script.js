@@ -44,10 +44,11 @@ message.innerHTML =
   'We use cookies for improved functionality and analytics. <button class="btn btn--close-cookie">Got it!</button>';
 
 const header = document.querySelector('.header');
-header.before(message);
+header.prepend(message);
 
 message.style.backgroundColor = '#37383d';
 message.style.overflow = 'hidden';
+message.style.width = '100vw';
 message.style.height =
   Number.parseFloat(window.getComputedStyle(message).height) + 12 + 'px';
 
@@ -114,3 +115,12 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 ///////////////////////////////////////
 // Sticky Navbar
+window.addEventListener('scroll', e => {
+  const stickyPos = document.getElementById('section--1').offsetTop;
+
+  if (window.scrollY > stickyPos) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
