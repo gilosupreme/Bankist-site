@@ -114,13 +114,46 @@ const handleHover = function (e) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 ///////////////////////////////////////
-// Sticky Navbar
-window.addEventListener('scroll', e => {
-  const stickyPos = document.getElementById('section--1').offsetTop;
+// Sticky Navbar using Scroll Event - not recommended
+/////////////////////////////////////
 
-  if (window.scrollY > stickyPos) {
+// window.addEventListener('scroll', e => {
+//   const stickyPos = document.getElementById('section--1').offsetTop;
+
+//   if (window.scrollY > stickyPos) {
+//     nav.classList.add('sticky');
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+//ANOTHER WAY OF DOING IT USING BOUNDINGCLIENTRECT()
+// const stickyPos = document
+//   .getElementById('section--1')
+//   .getBoundingClientRect().y;
+
+// if (stickyPos <= 0) {
+//   nav.classList.add('sticky');
+// } else {
+//   nav.classList.remove('sticky');
+// }
+// });
+const sticky = entries => {
+  const [entry] = entries; //destructure the array to get one entry
+
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   } else {
     nav.classList.remove('sticky');
   }
-});
+};
+
+const navHeight = window.getComputedStyle(nav).height;
+
+const options = {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}`,
+};
+
+const navObserver = new IntersectionObserver(sticky, options);
+
+navObserver.observe(header);
