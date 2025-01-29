@@ -163,6 +163,9 @@ const navObserver = new IntersectionObserver(sticky, options);
 
 navObserver.observe(header);
 
+///////////////////////////////////////
+// Sticky Navbar using IntersectionObserver API
+/////////////////////////////////////
 const showSections = (entries, observer) => {
   const [entry] = entries;
 
