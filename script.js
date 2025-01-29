@@ -136,6 +136,10 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //   nav.classList.remove('sticky');
 // }
 // });
+
+///////////////////////////////////////
+// Sticky Navbar using IntersectionObserver API
+/////////////////////////////////////
 const sticky = entries => {
   const [entry] = entries; //destructure the array to get one entry
 
