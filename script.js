@@ -12,6 +12,7 @@ const tabsContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
+const allSections = document.querySelectorAll('.section');
 
 const openModal = function (e) {
   e.preventDefault(); //prevents hrefs with value '#' from taking us to top of the page
@@ -161,3 +162,25 @@ const options = {
 const navObserver = new IntersectionObserver(sticky, options);
 
 navObserver.observe(header);
+
+const showSections = (entries, observer) => {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+
+  observer.unobserve(entry.target);
+};
+
+const sectionOptions = {
+  root: null,
+  threshold: 0.25,
+};
+
+const sectObserver = new IntersectionObserver(showSections, sectionOptions);
+
+allSections.forEach(section => {
+  section.classList.add('section--hidden');
+  sectObserver.observe(section);
+});
