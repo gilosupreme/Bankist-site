@@ -14,6 +14,14 @@ const tabContent = document.querySelectorAll('.operations__content');
 const nav = document.querySelector('.nav');
 const allSections = document.querySelectorAll('.section');
 
+window.addEventListener('load', () => {
+  document.documentElement.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+});
+
 const openModal = function (e) {
   e.preventDefault(); //prevents hrefs with value '#' from taking us to top of the page
   modal.classList.remove('hidden');
@@ -164,7 +172,7 @@ const navObserver = new IntersectionObserver(sticky, options);
 navObserver.observe(header);
 
 ///////////////////////////////////////
-// Sticky Navbar using IntersectionObserver API
+// Reveal elements on scroll using IntersectionObserver API
 /////////////////////////////////////
 const showSections = (entries, observer) => {
   const [entry] = entries;
@@ -186,4 +194,35 @@ const sectObserver = new IntersectionObserver(showSections, sectionOptions);
 allSections.forEach(section => {
   section.classList.add('section--hidden');
   sectObserver.observe(section);
+});
+
+///////////////////////////////////////
+// Lazy Loading images IntersectionObserver API
+/////////////////////////////////////
+
+const lazyLoad = (entries, imgObserver) => {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', () => {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  imgObserver.unobserve(entry.target);
+};
+
+const lazyOptions = {
+  root: null,
+  threshold: 0.1,
+};
+
+const lazyObserver = new IntersectionObserver(lazyLoad, lazyOptions);
+
+const lazyImgs = document.querySelectorAll('img[data-src]');
+
+lazyImgs.forEach(img => {
+  lazyObserver.observe(img);
 });
