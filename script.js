@@ -231,12 +231,31 @@ const slides = document.querySelectorAll('.slide');
 const slideLen = slides.length - 1;
 const next = document.querySelector('.slider__btn--right');
 const prev = document.querySelector('.slider__btn--left');
+const dotCont = document.querySelector('.dots');
 
 let currSlide = 0;
 
+const createDots = () => {
+  slides.forEach((_, i) => {
+    dotCont.insertAdjacentHTML(
+      'beforeend',
+      `<button class ="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+
+createDots();
+
 const goToSlide = slide => {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active'));
+
   slides.forEach((s, i) => {
     s.style.transform = `translateX(${(i - slide) * 100}%)`;
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
   });
 };
 
@@ -270,4 +289,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') nextSlide();
 
   e.key === 'ArrowLeft' && prevSlide();
+});
+
+dotCont.addEventListener('click', e => {
+  if (e.target.classList.contains('dots__dot')) {
+    const targetSlide = e.target.dataset.slide;
+    goToSlide(targetSlide);
+  }
 });
