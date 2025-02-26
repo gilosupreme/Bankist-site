@@ -297,3 +297,12 @@ dotCont.addEventListener('click', e => {
     goToSlide(targetSlide);
   }
 });
+
+// document.addEventListener('DOMContentLoaded', e => {
+//   console.log('HTML Parsed');
+// });
+
+window.addEventListener('beforeunload', e => {
+  e.preventDefault();
+  e.returnValue = '';
+});
